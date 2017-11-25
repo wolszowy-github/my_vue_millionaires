@@ -1,16 +1,33 @@
 <template>
     <div class="row">
-        <div class="cnt-black margin-top-40 panel panel-default col-lg-12">
+        <div class="margin-top-40 panel panel-default col-lg-12">
             <h1 class="text-center h2 text-muted">Czy chcesz zostać Milionerem? <br> Zagraj!</h1>
             <div>
                 <img class="center-block" src="assets/logo.png" alt="">
             </div>
-            <div class="text-center margin-bottom-40">
-                <router-link tag="button" :to="{name: 'play'}" class="btn primary">Rozpocznij Grę!</router-link>
+            <settings v-if="gameStarted"></settings>
+            <div v-else class="text-center margin-bottom-40">
+                <button @click="gameStarted = !gameStarted" class="btn primary">Rozpocznij Grę!</button>
             </div>  
         </div>
     </div>
 </template>
+
+
+<script>
+import Settings from './Settings.vue'
+
+export default{
+  components:{
+    Settings          
+  },
+  data:() => (
+      {
+         gameStarted: false 
+    }
+)
+}
+</script>
 
 <style lang="scss" scoped>
 

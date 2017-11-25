@@ -7,18 +7,10 @@
 </template>
 
 <script>
-import Introduction from './components/Introduction.vue'
+import PlayView from './components/PlayView.vue'
 
 export default {
-  components:{
-    Introduction
-  },
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
+
 }
 </script>
 
