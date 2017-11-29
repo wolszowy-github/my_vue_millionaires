@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col-lg-6 col-lg-offset-3">
         <div class="row">
-          <answers :key="answer" :answer="answer" v-for="answer in questionsGot[currentQuestion].allAnswers"></answers> 
+          <answers  :key="answer" :answer="answer" v-for="(answer, index) in questionsGot[currentQuestion].allAnswers"></answers> 
         </div>
       </div>
     </div>
@@ -51,6 +51,7 @@
       }
     },
     created(){
+      this.$store.state.gameElements = [];
       let vm = this;
       axios.get('https://opentdb.com/api.php?amount=15&difficulty='+ this.$store.state.gameLvl +'&type=multiple')
       .then(function (serverData) { 
@@ -85,4 +86,9 @@
     50% {opacity: 1}
     100% {opacity: 0}
   }
+  
+  .gray{
+    background-color: gray !important;
+  }
+
 </style>

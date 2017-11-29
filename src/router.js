@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Introduction from './components/Introduction.vue';
 import PlayView from './components/PlayView.vue';
 import Settings from './components/Settings.vue';
+import LostGame from './components/LostGame.vue';
+
 
 Vue.use(Router);
 
@@ -23,6 +25,12 @@ export default new Router({
             path: '/settings',
             component: Settings,
             name: 'settings'
+        },
+        {
+          path: '/lost',
+          component: LostGame,
+          name: 'lost'
         }
+
     ]
 })
