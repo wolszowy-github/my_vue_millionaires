@@ -1,13 +1,14 @@
 <template>
     <div class="row">
-        <div class="margin-top-40 panel panel-default col-lg-12">
-            <h1 class="text-center h2 text-muted">Czy chcesz zostać Milionerem? <br> Zagraj!</h1>
+        <div class="margin-top-80 panel panel-default col-lg-10 col-lg-offset-1 game-container">
+            <h1 class="text-center margin-top-35">Hello stranger!</h1>
+            <h2 class="text-center h4">Do you think you're smart enough to become na millioner?</h2>
             <div>
-                <img class="center-block" src="assets/logo.png" alt="">
+                <img class="center-block" src="src/assets/logo.png" alt="">
             </div>
             <settings v-if="gameStarted"></settings>
             <div v-else class="text-center margin-bottom-40">
-                <button @click="gameStarted = !gameStarted" class="btn primary">Rozpocznij Grę!</button>
+                <button @click="gameStarted = !gameStarted" class="btn primary">Prove It!</button>
             </div>  
         </div>
     </div>
@@ -31,12 +32,20 @@ export default{
 
 <style lang="scss" scoped>
 
-    .margin-top-40{
-       margin-top: 40px; 
+    .margin-bottom-40{
+       margin-bottom: 40px; 
     }
 
-     .margin-bottom-40{
-       margin-bottom: 40px; 
+     .margin-top-80{
+       margin-top: 80px; 
+    }
+
+     .margin-top-35{
+       margin-top: 35px; 
+    }
+
+    .panel-transparent{
+        background-color: rgba(242, 241, 241, 0.5);
     }
 
 </style>

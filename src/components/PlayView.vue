@@ -1,18 +1,30 @@
 <template>
   <div v-if="questionsGot.length">
-    <div class="row">
-      <game-status></game-status>
-      <div :class="addClasses(index)" :key="index" v-for="(item, index) in questionsGot" class="column panel panel-default col-lg-2">{{item.reward}}$</div>
-    </div>
-    <div class="row">
-      <questions></questions>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 col-lg-offset-3">
-        <div class="row">
-          <answers  :key="answer" :answer="answer" v-for="(answer, index) in questionsGot[currentQuestion].allAnswers"></answers> 
+    <div class="row margin-top-80">
+        <div class="col-lg-10">
+          <div class="row padding-main-container">
+              <div class="panel col-sm-12 panel-default">
+                <h2 class="text-center h2">Level: {{this.$store.state.gameLvl}} <br> question: {{this.$store.state.currentQuestion + 1}} out of {{questionsGot.length}} for
+                    {{questionsGot[currentQuestion].reward}}$
+                </h2>
+              </div>
+          </div>
+          <div class="row margin-top-35">
+              <questions></questions>
+          </div>
+          <div class="row margin-top-35">
+            <div class="col-lg-8 col-lg-offset-2">
+              <div class="row">
+                  <answers :key="answer" :answer="answer" v-for="(answer, index) in questionsGot[currentQuestion].allAnswers"></answers>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+        <div class="col-lg-2">
+          <div class="row">
+              <div :class="addClasses(index)" :key="index" v-for="(item, index) in questionsGot" class="column text-center panel panel-default col-lg-12">{{item.reward.toLocaleString()}}$</div>
+          </div>
+        </div>
     </div>
   </div>
 </template>
@@ -24,13 +36,11 @@
  import {formatGameObj} from '../formatter'
  import Answers from './Answers.vue'
  import Questions from './Questions.vue'
- import GameStatus from './GameStatus.vue'
 
   export default {
     components:{
       Answers,
-      Questions,
-      GameStatus
+      Questions
     },
     data: () => ({
       questionsGot:[]
@@ -67,9 +77,9 @@
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .panel{
-    margin-bottom: 7px; 
+    margin-bottom: 15px; 
   }
 
   .passed{
@@ -87,8 +97,21 @@
     100% {opacity: 0}
   }
   
-  .gray{
+  .gray div{
     background-color: gray !important;
   }
+
+    .margin-top-80{
+      margin-top: 80px; 
+  }
+
+    .margin-top-35{
+      margin-top: 35px; 
+  }
+
+  .padding-main-container{
+    padding: 0 15px;
+  }
+
 
 </style>

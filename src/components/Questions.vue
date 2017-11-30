@@ -1,5 +1,5 @@
 <template>
-  <div v-html="currentQuestion" class="text-center column panel panel-default col-lg-12">Question: {{currentQuestion}}</div>
+  <div v-html="currentQuestion" class="h2 question-padding text-center column panel panel-default col-lg-10 col-lg-offset-1">Question: {{currentQuestion}}</div>
 </template>
 
 
@@ -17,5 +17,9 @@
 <style lang="scss" scoped>
   .panel{
     margin-bottom: 7px; 
+  }
+
+  .question-padding{
+    padding: 45px;
   }
 </style>
