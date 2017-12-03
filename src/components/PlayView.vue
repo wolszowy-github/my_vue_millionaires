@@ -4,7 +4,7 @@
         <div class="col-lg-10">
           <div class="row padding-main-container">
               <div class="panel col-sm-12 panel-default">
-                <h2 class="text-center h2">Level: {{this.$store.state.gameLvl}} <br> question: {{this.$store.state.currentQuestion + 1}} out of {{questionsGot.length}} for
+                <h2 class="text-center h2">Category: {{this.$store.state.gameElements[currentQuestion].category}}, Level: {{this.$store.state.gameLvl}} <br> question: {{this.$store.state.currentQuestion + 1}} out of {{questionsGot.length}} for
                     {{questionsGot[currentQuestion].reward}}$
                 </h2>
               </div>
@@ -15,7 +15,7 @@
           <div class="row margin-top-35">
             <div class="col-lg-8 col-lg-offset-2">
               <div class="row">
-                  <answers :key="answer" :answer="answer" v-for="(answer, index) in questionsGot[currentQuestion].allAnswers"></answers>
+                  <answers :key="answer" :class="{'flashing-green': correctAnswer == answer && answerChecked, 'red': (answer != correctAnswer) && (userAnswer === answer) && answerChecked, 'inactive-btns': answer !== userAnswer && answerChecked}" :answer="answer" @userAnswer="validateAnswers($event)" v-for="(answer, index) in questionsGot[currentQuestion].allAnswers"></answers>
               </div>
             </div>
           </div>
@@ -43,11 +43,16 @@
       Questions
     },
     data: () => ({
-      questionsGot:[]
+      questionsGot:[],
+      answerChecked: false,
+      userAnswer: null
     }),
     computed:{
       currentQuestion(){
         return this.$store.state.currentQuestion;
+      },
+      correctAnswer(){
+        return this.$store.state.gameElements[this.currentQuestion].correctAnswer;
       }
     },
     methods:{
@@ -58,6 +63,18 @@
         if(index === this.currentQuestion){
           return 'active'
         }
+      },
+      validateAnswers(answer){
+        if(this.answerChecked){
+          return
+        }
+        this.answerChecked = true;
+        this.userAnswer = answer;
+
+        setTimeout(()=>{
+          this.answerChecked = false;
+          this.userAnswer = null;
+        }, 2200)
       }
     },
     created(){
@@ -97,8 +114,10 @@
     100% {opacity: 0}
   }
   
-  .gray div{
-    background-color: gray !important;
+  .inactive-btns div{
+    pointer-events: none;
+    cursor: none;
+    // background-color: yellow;
   }
 
     .margin-top-80{
@@ -111,6 +130,15 @@
 
   .padding-main-container{
     padding: 0 15px;
+  }
+
+  .red > div{
+  background-color: red;
+  transition: background-color 1s;
+  }
+
+  .flashing-green > div {
+    animation: flash .5s linear 4 forwards;
   }
   
   
